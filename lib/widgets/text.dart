@@ -20,17 +20,25 @@ class PlainText extends StatelessWidget {
 }
 
 class BoldText extends StatelessWidget {
-  const BoldText({super.key, required this.text, required this.textSize});
+  const BoldText(
+      {super.key, required this.text, required this.textSize, this.textColor});
   final String text;
   final double textSize;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: textSize,
-        fontWeight: FontWeight.bold,
-      ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: textSize,
+            fontWeight: FontWeight.bold,
+            color: textColor,
+          ),
+        ),
+      ],
     );
   }
 }

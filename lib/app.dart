@@ -5,6 +5,7 @@ import 'package:calculator/screens/comingsoonscreen/comingSoon.dart';
 import 'package:calculator/screens/gstcalculator/gst_screen.dart';
 import 'package:calculator/screens/home_screen/home_screen.dart';
 import 'package:calculator/screens/loancalculator/loan_screen.dart';
+import 'package:calculator/util/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
             page: () => const ComingsoonScreen())
       ],
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.backgroundColor),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
