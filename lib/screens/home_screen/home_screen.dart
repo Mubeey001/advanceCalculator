@@ -1,5 +1,6 @@
 import 'package:calculator/data/calculator_model.dart';
 import 'package:calculator/data/list_of_calculators.dart';
+import 'package:calculator/util/constants/colors.dart';
 import 'package:calculator/util/constants/text.dart';
 import 'package:calculator/widgets/custom_app_bar.dart';
 import 'package:calculator/widgets/text.dart';
@@ -39,6 +40,7 @@ class HomeScreen extends StatelessWidget {
                       Get.toNamed(calculator.route);
                     },
                     child: Card(
+                      color: AppColor.backgroundColor,
                       elevation: 6,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
