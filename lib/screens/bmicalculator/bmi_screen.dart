@@ -1,8 +1,8 @@
 import 'package:calculator/controllers/bmi_controller.dart';
 import 'package:calculator/util/constants/size.dart';
 import 'package:calculator/util/validator.dart';
+import 'package:calculator/widgets/app_button.dart';
 import 'package:calculator/widgets/build_from_field.dart';
-import 'package:calculator/widgets/calculate_button.dart';
 import 'package:calculator/widgets/custom_app_bar.dart';
 import 'package:calculator/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class _BmiScreenState extends State<BmiScreen> {
                             value, "Weight in kg"),
                       ),
                       const SizedBox(height: AppSpace.spaceBtwElement),
-                      calculateButton(
+                      appButton(
                           name: "Calculate BMI",
                           onPressed: () {
                             if (_formKey.currentState!.validate() == true) {

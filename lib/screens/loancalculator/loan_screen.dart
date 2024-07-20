@@ -1,4 +1,6 @@
 import 'package:calculator/controllers/loan_controller.dart';
+import 'package:calculator/util/constants/size.dart';
+import 'package:calculator/widgets/app_button.dart';
 import 'package:calculator/widgets/custom_app_bar.dart';
 import 'package:calculator/widgets/slider_widget.dart';
 import 'package:calculator/widgets/text.dart';
@@ -18,7 +20,7 @@ class _LoanScreenState extends State<LoanScreen> {
     return Scaffold(
       appBar: const CustomAppBar(),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
               padding: EdgeInsets.all(10.0),
@@ -36,11 +38,13 @@ class _LoanScreenState extends State<LoanScreen> {
                           label: "Loan amount",
                           value: loancontroller.loanAmount.value,
                           min: 0.0,
-                          max: 100,
+                          max: 2000,
                           onChanged: (value) {
                             loancontroller.loanAmount.value = value;
+                            loancontroller.calculateLoanDetails();
                             loancontroller.update();
                           }),
+                      const SizedBox(height: AppSpace.spaceBtwElement),
                       BuildSlider(
                           symbol: "%",
                           label: "Rate of interest (p.a)",
@@ -49,8 +53,10 @@ class _LoanScreenState extends State<LoanScreen> {
                           max: 100,
                           onChanged: (value) {
                             loancontroller.interestRate.value = value;
+                            loancontroller.calculateLoanDetails();
                             loancontroller.update();
                           }),
+                      const SizedBox(height: AppSpace.spaceBtwElement),
                       BuildSlider(
                           symbolAfter: "Yr",
                           label: "Loan tenure",
@@ -59,36 +65,79 @@ class _LoanScreenState extends State<LoanScreen> {
                           max: 100,
                           onChanged: (value) {
                             loancontroller.tenure.value = value;
+                            loancontroller.calculateLoanDetails();
                             loancontroller.update();
                           }),
+                      const SizedBox(height: AppSpace.spaceBtwElement),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const PlainText(
+                                  text: "Monthly EMI", textSize: 15),
+                              Obx(() => PlainText(
+                                  text:
+                                      "₦${loancontroller.monthlyEmi.value.toStringAsFixed(2)}",
+                                  textSize: 15)),
+                            ],
+                          ),
+                          const SizedBox(height: AppSpace.spaceBtwElement),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const PlainText(
+                                  text: "Principal Amount", textSize: 15),
+                              Obx(() => PlainText(
+                                  text:
+                                      "₦${loancontroller.totalPrincipal.value.toStringAsFixed(2)}",
+                                  textSize: 15)),
+                            ],
+                          ),
+                          const SizedBox(height: AppSpace.spaceBtwElement),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const PlainText(
+                                  text: "Total Interest", textSize: 15),
+                              Obx(() => PlainText(
+                                  text:
+                                      "₦${loancontroller.totalInterest.value.toStringAsFixed(2)}",
+                                  textSize: 15)),
+                            ],
+                          ),
+                          const SizedBox(height: AppSpace.spaceBtwElement),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const PlainText(
+                                    text: "Total Amount", textSize: 15),
+                                Obx(() => PlainText(
+                                    text:
+                                        "₦${loancontroller.totalAmount.value.toStringAsFixed(2)}",
+                                    textSize: 15))
+                              ]),
+                        ],
+                      ),
                     ],
                   );
                 }),
           ),
-          const Padding(
-            padding: EdgeInsets.all(20),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    PlainText(text: "Monthly EMI", textSize: 20),
-                    PlainText(text: "Principla Amount", textSize: 20),
-                    PlainText(text: "Total Interest", textSize: 20),
-                    PlainText(text: "Total Amount", textSize: 20),
-                  ],
+                appButton(
+                  name: "Share",
+                  onPressed: () {},
+                  icon: const Icon(Icons.share, color: Colors.white),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    PlainText(text: "text", textSize: 20),
-                    PlainText(text: "text", textSize: 20),
-                    PlainText(text: "text", textSize: 20),
-                    PlainText(text: "text", textSize: 20),
-                  ],
-                )
+                appButton(
+                  name: "Save as Pdf",
+                  onPressed: () {},
+                ),
               ],
             ),
           )

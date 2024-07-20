@@ -2,9 +2,10 @@ import 'package:calculator/util/constants/colors.dart';
 import 'package:calculator/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-Widget calculateButton({
+Widget appButton({
   required final String name,
   required void Function()? onPressed,
+  Icon? icon,
 }) {
   return MaterialButton(
     shape: RoundedRectangleBorder(
@@ -14,11 +15,20 @@ Widget calculateButton({
     minWidth: 100.0,
     color: AppColor.primaryColor,
     onPressed: onPressed,
-    child: BoldText(
-      text: name,
-      textSize: 15,
-      textColor: Colors.white,
-    ),
     elevation: 10.0,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (icon != null) ...[
+          icon,
+          const SizedBox(width: 5),
+        ],
+        BoldText(
+          text: name,
+          textSize: 15,
+          textColor: Colors.white,
+        ),
+      ],
+    ),
   );
 }
