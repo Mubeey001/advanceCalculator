@@ -1,5 +1,4 @@
 import 'package:calculator/util/constants/colors.dart';
-import 'package:calculator/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class BuildSlider extends StatelessWidget {
@@ -26,24 +25,24 @@ class BuildSlider extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PlainText(text: label, textSize: 15),
-        Text(
-          '$symbol ${value.toStringAsFixed(1)} $symbolAfter',
-          style: const TextStyle(
-              color: AppColor.primaryColor,
-              backgroundColor: AppColor.backgroundColor,
-              fontWeight: FontWeight.bold),
-        ),
-        Column(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Slider(
-              value: value,
-              min: min,
-              max: max,
-              divisions: (max - min).toInt(),
-              onChanged: onChanged,
+            Text(label),
+            Text(
+              '$symbol ${value.toStringAsFixed(1)} $symbolAfter',
+              style: const TextStyle(
+                  color: AppColor.primaryColor,
+                  backgroundColor: AppColor.backgroundColor,
+                  fontWeight: FontWeight.bold),
             ),
           ],
+        ),
+        Slider(
+          value: value,
+          min: min,
+          max: max,
+          onChanged: onChanged,
         ),
       ],
     );
